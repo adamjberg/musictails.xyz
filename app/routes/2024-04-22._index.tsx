@@ -12,11 +12,24 @@ export default function Index() {
         return;
       }
 
+      const audioContext = new (window.AudioContext ||
+        (window as any).webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+
+      oscillator.type = "sine";
+      oscillator.frequency.value = 440;
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+
       const resizeHandler = () => {
         const parentWidth = canvas.parentElement?.clientWidth || 0;
         const width = Math.min(parentWidth, 600);
         canvas.width = width;
         canvas.height = width;
+
+        ctx.fillStyle = "#000000";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
       };
 
       let animationFrameId = 0;
@@ -46,10 +59,20 @@ export default function Index() {
         ctx.fillStyle = "#FFFFFF";
         ctx.fill();
 
+        const volume = 1 - (amplitude + 1) / 2;
+        gainNode.gain.value = volume;
+
         animationFrameId = requestAnimationFrame(drawCircle);
       };
 
-      drawCircle();
+      canvas.addEventListener(
+        "click",
+        () => {
+          oscillator.start();
+          drawCircle();
+        },
+        { once: true }
+      );
 
       resizeHandler();
       window.addEventListener("resize", resizeHandler);
@@ -57,6 +80,7 @@ export default function Index() {
       return () => {
         cancelAnimationFrame(animationFrameId);
         window.removeEventListener("resize", resizeHandler);
+        audioContext.close();
       };
     }
   }, []);
