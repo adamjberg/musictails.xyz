@@ -4,6 +4,6 @@ import React from "react";
 export default function Index() {
   return <div>
     <h1>Homepage</h1>
-    <Link to={"/2024-04-22"}>2024-04-22</Link>
+    <Link to={"/2024-04-22-animating-sound-amplitude"}>Animating Sound: Amplitude</Link>
   </div>;
 }
