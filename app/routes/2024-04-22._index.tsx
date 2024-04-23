@@ -85,9 +85,14 @@ export default function Index() {
     }
   }, []);
   return (
-    <div>
+    <div style={{
+      maxWidth: 800,
+      margin: "0 auto"
+    }}>
       <h1>Animating Sound: Amplitude</h1>
+      <div style={{textAlign: "center"}}>
       <canvas ref={canvasRef}></canvas>
+      </div>
     </div>
   );
 }
