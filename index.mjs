@@ -12,8 +12,6 @@ const viteDevServer =
 
 const app = express();
 
-app.use(express.static("../fe/public"));
-
 app.use(
   viteDevServer
     ? viteDevServer.middlewares
