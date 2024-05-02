@@ -5,7 +5,8 @@ export default function Index() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    let mouseX = 0, mouseY = 0;
+    let mouseX = 0,
+      mouseY = 0;
 
     if (canvas) {
       const ctx = canvas.getContext("2d");
@@ -34,7 +35,7 @@ export default function Index() {
 
       let animationFrameId = 0;
 
-      canvas.addEventListener("mousemove", function(event) {
+      canvas.addEventListener("mousemove", function (event) {
         mouseX = event.clientX - canvas.offsetLeft;
         mouseY = event.clientY - canvas.offsetTop;
       });
@@ -50,7 +51,7 @@ export default function Index() {
         ctx.fillStyle = "#FFFFFF";
         ctx.fill();
 
-        const volume = 1 - (mouseY / canvas.height);
+        const volume = 1 - mouseY / canvas.height;
         gainNode.gain.value = volume;
 
         const numHalfWidths = mouseX / (canvas.width / 2);
@@ -80,16 +81,18 @@ export default function Index() {
     }
   }, []);
   return (
-    <div
-      style={{
-        maxWidth: 800,
-        margin: "0 auto",
-      }}
-    >
-      <h1>Animating Sound: Amplitude and Pitch</h1>
-      <div style={{ textAlign: "center" }}>
-        <canvas ref={canvasRef}></canvas>
+    <>
+      <div
+        style={{
+          maxWidth: 800,
+          margin: "0 auto",
+        }}
+      >
+        <h1>Animating Sound: Amplitude and Pitch</h1>
+        <div style={{ textAlign: "center" }}>
+          <canvas ref={canvasRef}></canvas>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
