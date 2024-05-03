@@ -166,7 +166,7 @@ export default function Index() {
           margin: "0 auto",
         }}
       >
-        <h1>Animating Sound: Amplitude and Pitch</h1>
+        <h1>Animating Sound: Two Bodies</h1>
         <div style={{ textAlign: "center" }}>
           <canvas ref={canvasRef}></canvas>
         </div>
